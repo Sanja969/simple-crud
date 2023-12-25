@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getPosts } from './redux/postsReducer';
 import { AppDispatch } from './redux/store';
-import Post from './components/PostDetail';
+import PostDetail from './components/PostDetail';
+import FormPost from './components/FormPost';
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,7 +20,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Navigation />}>
         <Route index element={<Home />} />
-        <Route path="/:id" element={<Post />} />
+        <Route path="detail/:id" element={<PostDetail />} />
+        <Route path="/create" element={<FormPost />} />
       </Route>
     </Routes>
   );
