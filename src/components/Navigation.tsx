@@ -22,7 +22,7 @@ export default function Navigation () {
         <a href="/"><p className='text-white text-[20px] cursor-pointer'>Posts</p></a>
         {
           location.pathname === '/' && <Button 
-            className={`${buttonClassName} bg-yellow-400 hover:bg-yellow-500`}
+            className={buttonClassName}
             onClick={() => onNewPost()}
           >
             New Post

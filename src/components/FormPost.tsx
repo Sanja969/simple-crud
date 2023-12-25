@@ -70,11 +70,10 @@ export default function FormPost() {
 
   return (
     <div className="flex flex-col items-center pt-10">
-      <h3 className="">ADD NEW HOUSE</h3>
       <form className="flex flex-col gap-2 w-[50%]" onSubmit={submitPost}>
-        <input className="border h-8 w-[100%]" type="text" name="title" onChange={handleChange} value={title} required />
-        <textarea className="border h-40 w-[100%]" name="body" onChange={handleChange} value={body} required />
-        <Button type="submit">SUBMIT</Button>
+        <input className="border h-8 w-[100%] p-2" type="text" name="title" onChange={handleChange} value={title} required />
+        <textarea className="border h-40 w-[100%] p-2" name="body" onChange={handleChange} value={body} required />
+        <Button className="border bg-dark-400 hover:bg-dark-500 text-white p-2" type="submit">SAVE POST</Button>
       </form>
     </div>
   )
