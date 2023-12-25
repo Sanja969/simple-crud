@@ -3,7 +3,9 @@ import { Dispatch } from 'redux';
 const url = 'https://jsonplaceholder.typicode.com/posts';
 const GET_POSTS = 'GET_POSTS';
 const GET_POST = 'GET_POST';
+const DELETE_POST = 'DELETE_POST';
 const SAVE_POST = 'SAVE_POST';
+
 const initialState = {posts: [], post: {}};
 
 export interface Post {
@@ -15,7 +17,7 @@ export interface Post {
 
 interface GetPostsAction {
   type: string;
-  payload: Post[] | Post;
+  payload: any;
 }
 
 const postsReducer = (state = initialState, action: GetPostsAction) => {
@@ -26,6 +28,11 @@ const postsReducer = (state = initialState, action: GetPostsAction) => {
       return {...state, posts: [...state.posts, action.payload as Post]};
     case GET_POST:
       return {...state, post: action.payload as Post};
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((post: Post) => post.id !== action.payload)
+      };
     default:
       return state;
   }
@@ -99,7 +106,10 @@ export const deletePost = (id: string) => async(dispatch: Dispatch) => {
       },
     });
 
-  getPosts();
+    dispatch({
+      type: DELETE_POST,
+      payload: id,
+    })
 };
 
 export default postsReducer;
