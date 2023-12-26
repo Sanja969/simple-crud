@@ -25,7 +25,7 @@ export default function PostDetail() {
 
   const updatePost = () => {
     dispatch(setData({title: post.title, body: post.body, id: post.id.toString()}));
-    navigate('/create');
+    navigate('/save');
   };
 
   return (

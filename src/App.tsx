@@ -21,7 +21,7 @@ function App() {
       <Route path="/" element={<Navigation />}>
         <Route index element={<Home />} />
         <Route path="detail/:id" element={<PostDetail />} />
-        <Route path="/create" element={<FormPost />} />
+        <Route path="/save" element={<FormPost />} />
       </Route>
     </Routes>
   );

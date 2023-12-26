@@ -13,7 +13,7 @@ export default function Navigation () {
 
   const onNewPost = () => {
     dispatch(setData({title: '', body: '', id: ''}))
-    navigate('/create')
+    navigate('/save')
   };
 
   return (
