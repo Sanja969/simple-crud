@@ -1,18 +1,13 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/base/Button';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../redux/store';
-import { setData } from '../redux/formReducer';
 
 export default function Navigation () {
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch<AppDispatch>();
 
   const buttonClassName = "text-white h-8 p-2 flex items-center justify-center rounded";
 
   const onNewPost = () => {
-    dispatch(setData({title: '', body: '', id: ''}))
     navigate('/save')
   };
 
