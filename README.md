@@ -21,6 +21,12 @@ After you clone it run the following commands
 - npm install
 - npm start
 
+## Branch v2
+
+- git checkout v2
+
+There is another version of the app in branch v2
+
 ## Authors
 
 👤 **Sanja Mandic**
