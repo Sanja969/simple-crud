@@ -39,48 +39,70 @@ const postsReducer = (state = initialState, action: GetPostsAction) => {
 };
 
 export const getPosts = () => async (dispatch: Dispatch) => {
-  const response = await fetch(url);
-  const posts = await response.json();
-
-  dispatch({
-    type: GET_POSTS,
-    payload: posts,
-  });
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const posts = await response.json();
+    dispatch({
+      type: GET_POSTS,
+      payload: posts,
+    });
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+  }
 };
 
 export const getPost = (id: string) => async (dispatch: Dispatch) => {
-  const response = await fetch(`${url}/${id}`);
-  const post = await response.json();
+  try {
+    const response = await fetch(`${url}/${id}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const post = await response.json();
+  
+    dispatch({
+      type: GET_POST,
+      payload: post,
+    });
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+  }
 
-  dispatch({
-    type: GET_POST,
-    payload: post,
-  });
 };
 
 export const savePost = (post: Post) => async(dispatch: Dispatch) => {
-  const response = await fetch(url,
-    {
-      method: 'POST',
-      body: JSON.stringify(post),
-      headers: {
-       "Content-Type": "application/json"
-      },
-    });
+  try {
+    const response = await fetch(url,
+      {
+        method: 'POST',
+        body: JSON.stringify(post),
+        headers: {
+         "Content-Type": "application/json"
+        },
+      });
 
-    const json = await response.json();
-    console.log(`after - ${json}`);
-
-  dispatch({
-    type: SAVE_POST,
-    payload: json,
-  })
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const json = await response.json();
+  
+    dispatch({
+      type: SAVE_POST,
+      payload: json,
+    })
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+  }
 };
 
 export const updatePost = (post: Post) => async(dispatch: Dispatch) => {
   const { id, ...other } = post;
 
-  const response = await fetch(`${url}/${id}`,
+  try {
+    const response = await fetch(`${url}/${id}`,
     {
       method: 'PUT',
       body: JSON.stringify(other),
@@ -89,16 +111,24 @@ export const updatePost = (post: Post) => async(dispatch: Dispatch) => {
       },
     });
 
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
     const json = await response.json();
 
-  dispatch({
-    type: GET_POST,
-    payload: json,
-  })
+    dispatch({
+      type: GET_POST,
+      payload: json,
+    })
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+  }
 };
 
 export const deletePost = (id: string) => async(dispatch: Dispatch) => {
-  await fetch(`${url}/${id}`,
+  try {
+    await fetch(`${url}/${id}`,
     {
       method: 'DELETE',
       headers: {
@@ -110,6 +140,9 @@ export const deletePost = (id: string) => async(dispatch: Dispatch) => {
       type: DELETE_POST,
       payload: id,
     })
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+  }
 };
 
 export default postsReducer;
